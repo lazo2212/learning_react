@@ -8,7 +8,7 @@ const Avatar = ({ person, size }) => {
   return (
     <img
       className="avatar"
-      src={getImageUrl('szV5sdG')}
+      src={getImageUrl(person.imageId)}
       alt={person.name}
       width={size}
       height={size}
@@ -46,7 +46,7 @@ const Profile = () => {
     <Card>
       <h1>Maria Skłodowska-Curie</h1>
       <Avatar
-        person={{ name: 'Maria Skłodowska-Curie', imageId: '1bX5QH6' }}
+        person={{ name: 'Maria Skłodowska-Curie', imageId: 'szV5sdG' }}
         size={100}
       />
     </Card>

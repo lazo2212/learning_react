@@ -1,58 +1,59 @@
 import React from 'react';
+import { getImageUrl } from './utils.js';
+import './App.css';
 
-const getImageUrl = (imageId, size = 's') => {
-  return 'https://i.imgur.com/' + imageId + size + '.jpg';
-};
-
-const Avatar = ({ person, size }) => {
+const Profile = ({ person, size, profession, awards, discovered }) => {
   return (
-    <img
-      className="avatar"
-      src={getImageUrl(person.imageId)}
-      alt={person.name}
-      width={size}
-      height={size}
-    />
-  );
-};
-
-const Card = ({ children }) => {
-  return (
-    <div
-      style={{ backgroundColor: 'black', color: 'pink', padding: '10px 40px' }}
-    >
-      {children}
+    <section className="profile">
+      <h2>{person.name}</h2>
+      <img
+        className="avatar"
+        src={getImageUrl(person.imageId)}
+        alt={person.name}
+        width={size}
+        height={size}
+      />
       <ul>
         <li>
           <b>Profession: </b>
-          physicist and chemist
+          {profession}
         </li>
         <li>
-          <b>Awards: 4 </b>
-          (Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal,
-          Matteucci Medal)
+          <b>Awards: {awards.length} </b>({awards})
         </li>
         <li>
           <b>Discovered: </b>
-          polonium (element)
+          {discovered}
         </li>
       </ul>
+    </section>
+  );
+};
+
+export default function Gallery() {
+  return (
+    <div>
+      <h1>Notable Scientists</h1>
+      <Profile
+        person={{ name: 'Maria Skłodowska-Curie', imageId: 'szV5sdG' }}
+        size={70}
+        profession="physicist and chemist"
+        awards={[
+          'Nobel Prize in Physics',
+          'Nobel Prize in Chemistry',
+          'Davy Medal',
+          'Matteucci Medal',
+        ]}
+        discovered="polonium (element)"
+      />
+
+      <Profile
+        person={{ name: 'Katsuko Saruhashi', imageId: 'YfeOqp2' }}
+        size={70}
+        profession="geochemist"
+        awards={['Miyake Prize for geochemistry', 'Tanaka Prize']}
+        discovered="a method for measuring carbon dioxide in seawater"
+      />
     </div>
   );
-};
-
-const Profile = () => {
-  return (
-    <Card>
-      <h1>Maria Skłodowska-Curie</h1>
-      <Avatar
-        person={{ name: 'Maria Skłodowska-Curie', imageId: 'szV5sdG' }}
-        size={100}
-      />
-    </Card>
-  );
-};
-
-export default function App() {
-  return <Profile />;
 }

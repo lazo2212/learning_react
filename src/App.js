@@ -19,7 +19,7 @@ const Profile = ({ person, size, profession, awards, discovered }) => {
           {profession}
         </li>
         <li>
-          <b>Awards: {awards.length} </b>({awards})
+          <b>Awards: {awards.length} </b>({awards.join(', ')})
         </li>
         <li>
           <b>Discovered: </b>

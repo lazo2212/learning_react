@@ -1,59 +1,45 @@
 import React from 'react';
-import { getImageUrl } from './utils.js';
+import { useState } from 'react';
+import { sculptureList } from './data.js';
 import './App.css';
 
-const recipes = [
-  {
-    id: 'greek-salad',
-    name: 'Greek Salad',
-    ingredients: ['tomatoes', 'cucumber', 'onion', 'olives', 'feta'],
-  },
-  {
-    id: 'hawaiian-pizza',
-    name: 'Hawaiian Pizza',
-    ingredients: [
-      'pizza crust',
-      'pizza sauce',
-      'mozzarella',
-      'ham',
-      'pineapple',
-    ],
-  },
-  {
-    id: 'hummus',
-    name: 'Hummus',
-    ingredients: ['chickpeas', 'olive oil', 'garlic cloves', 'lemon', 'tahini'],
-  },
-];
+const Gallery = () => {
+  const [index, setIndex] = useState(0);
+  const [showMore, setShowMore] = useState(false);
 
-const Recepie = ({ id, name, ingredients }) => {
-  return (
-    <div key={id}>
-      <h2>{name}</h2>
-      <ul>
-        {ingredients.map((ingredient) => {
-          return <li key={ingredient}>{ingredient}</li>;
-        })}
-      </ul>
-    </div>
-  );
-};
+  const handleClick = () => {
+    setIndex(index + 1);
+  };
 
-const RecepeList = () => {
+  const handleMoreClicks = () => {
+    setShowMore(!showMore);
+  };
+
+  let sculpture = sculptureList[index];
   return (
-    <div>
-      <h1>Recepies</h1>
-      {recipes.map((recepie) => (
-        <Recepie {...recepie} key={recepie.id} />
-      ))}
-    </div>
+    <>
+      <button onClick={handleClick}>Next</button>
+      <h2>
+        <i>{sculpture.name} </i>
+        by {sculpture.artist}
+      </h2>
+      <h3>
+        ({index + 1} of {sculptureList.length})
+      </h3>
+      <button onClick={handleMoreClicks}>
+        {showMore ? 'Hide' : 'Show'} details
+      </button>
+      {showMore && <p>{sculpture.description}</p>}
+      <img src={sculpture.url} alt={sculpture.alt} />
+      <p>{sculpture.description}</p>
+    </>
   );
 };
 
 export default function App() {
   return (
     <>
-      <RecepeList />
+      <Gallery />
     </>
   );
 }
